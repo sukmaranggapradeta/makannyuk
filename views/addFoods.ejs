@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/header.ejs') %>
+<body>
+<%- include('../partials/menu.ejs') %>
+  
+
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+<!-- !PAGE LOGIN! <div class="loginbox">-->
+
+    <h1>Food</h1>
+    <form action="/addfood" method="POST" enctype="multipart/form-data">
+        <label for="food_name">Food name :</label><br>
+        <input type="text" name="food_name" placeholder="Food name..."><br>
+        <label for="category">Category :</label><br>
+        <input type="text" name="category" placeholder="Category..."><br>
+        <label for="deskripsi">Deskripsi :</label><br>
+        <textarea rows="4" cols="50" name="deskripsi" placeholder="Description..."></textarea><br>
+
+        <h2><%= typeof msg != 'undefined' ? msg : '' %> </h2>
+
+        <label for="myPicture">Upload picture :</label><br>        
+        <input type="file" name="myPicture"><br>
+        <label for="ingredient">Ingredient :</label><br>
+        <input type="text" name="ingredient" placeholder="ingredient..."><br>
+        <p></p>
+        <input type="submit" value="Save">
+
+    </form>
+</div>
+  
+</body>
+</html>
