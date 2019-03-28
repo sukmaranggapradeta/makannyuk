@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/header.ejs') %>
+<body>
+<%- include('../partials/menu.ejs') %>
+  
+
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+<!-- !PAGE LOGIN!  -->
+
+    <h1>Update Food</h1>
+    <!-- enctype="multipart/form-data"  -->
+    <form action="/addfood" method="POST" enctype="multipart/form-data">
+        <label for="food_name">Food name :</label><br>
+        <input type="text" name="food_name" placeholder="Food name..."><br>
+
+        <label for="category">Category :</label><br>
+        <input list="category" name="category" placeholder="Choose category...">
+        <datalist id="category" value="tes">
+
+        <% for (let i = 0 ; i < dataCategory.length ; i++ ) {%>
+          <option value="<%= dataCategory[i].category_name %>">
+        <% } %> 
+
+        
+        </datalist>
+        <br>
+        <label for="deskripsi">Deskripsi :</label><br>
+        <textarea rows="4" cols="50" name="deskripsi" placeholder="Description..."></textarea><br>
+
+        <h2><%= typeof msg != 'undefined' ? msg : '' %> </h2>
+
+        <label for="myPicture">Upload picture :</label><br>        
+        <input type="file" name="myPicture"><br>
+        <label for="ingredient">Ingredient :</label><br>
+        <input type="text" name="ingredient" placeholder="ingredient..."><br>
+        <p></p>
+        <input type="submit" value="Save">
+
+    </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>
+
+</body>
+</html>
