@@ -7,8 +7,8 @@ Router.get('/',(req,res)=>{
 
 Router.post('/',(req,res)=>{
     let input = req.body
-    res.send(input)
-    console.log(input.user_name)
+    // res.send(input)
+    // console.log(input.user_name)
     Model.User.findOne({
         where :{
             user_name : input.user_name
@@ -19,9 +19,12 @@ Router.post('/',(req,res)=>{
         const hash = crypto.createHmac('sha256',secret).update(input.password).digest('hex')
         input.password = hash
         if(input.password === sukses.password){
+            console.log(`masuk <================`)
           req.session.loginStatus = true
           req.session.userName = input.user_name
-            res.redirect('/')
+          console.log(`${req.session.loginStatus} <================`)
+            // res.send(req.session.loginStatus)
+          res.redirect('/')
         }else{
             res.send("password salah")
         }

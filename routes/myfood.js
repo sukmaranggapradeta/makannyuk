@@ -2,6 +2,9 @@ const Router = require('express').Router()
 const Model = require('../models')
 
 Router.get('/',(req,res)=>{
+    // console.log(req.session)
+    // console.log(`${req.session.loginStatus} <================`)
+
     Model.Food.findAll({
         order:[["id","ASC"]],
         include:[{model:Model.Ingredient}]
