@@ -18,6 +18,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/',require('./routes/home'))
 app.use('/login',require('./routes/login'))
+app.use('/logout',require('./routes/logout'))
 app.use('/signup',require('./routes/signup'))
 app.use('/addfood',function (req,res,next){
     // console.log(req.session)

@@ -2,13 +2,11 @@ const Router = require('express').Router()
 const Model = require('../models')
 const crypto = require('crypto'); 
 Router.get('/',(req,res)=>{
-    res.render('./login.ejs')
+    res.render('./login.ejs', {message: null})
 })
 
 Router.post('/',(req,res)=>{
     let input = req.body
-    // res.send(input)
-    // console.log(input.user_name)
     Model.User.findOne({
         where :{
             user_name : input.user_name
@@ -19,18 +17,24 @@ Router.post('/',(req,res)=>{
         const hash = crypto.createHmac('sha256',secret).update(input.password).digest('hex')
         input.password = hash
         if(input.password === sukses.password){
-            console.log(`masuk <================`)
           req.session.loginStatus = true
           req.session.userName = input.user_name
-          console.log(`${req.session.loginStatus} <================`)
             // res.send(req.session.loginStatus)
-          res.redirect('/')
+           console.log('masuuuuuk','----')
+           console.log(req.session.loginStatus)
+           Model.Food.findAll()
+           .then(dataFoods=>{
+               res.render('./index.ejs',{dataFoods:dataFoods, currentUser: req.session.loginStatus})
+           })
+           .catch(function(err){
+           res.send(err.message)
+           })
         }else{
-            res.send("password salah")
+            res.render('./login.ejs', {message: 'password salah'})
         }
     })
     .catch(err=>{
-        res.send("user_name not found")
+        res.render('./login.ejs', {message: 'user name tidak ditemukan'})
     })
 })
 
