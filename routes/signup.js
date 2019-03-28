@@ -18,7 +18,7 @@ Router.post('/',(req,res)=>{
         updatedAt:new Date
     })
     .then(sukses=>{
-        res.send("Sukses login")
+        res.redirect('/login')
     })
     .catch(err=>{
         res.send(err.message)

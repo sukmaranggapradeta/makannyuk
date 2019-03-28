@@ -5,7 +5,11 @@ const bodyParser = require('body-parser')
 const multer = require('multer')
 const path = require('path')
 const ejs = require('ejs')
+var session = require('express-session');
 //menggunakan library pada express
+app.use(session({
+    secret: "Shh, its a secret!"
+}));
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public')); 
@@ -16,8 +20,9 @@ app.use('/login',require('./routes/login'))
 app.use('/signup',require('./routes/signup'))
 app.use('/addfood',require('./routes/addfood'))
 //---> listFood
-app.use('/listFood',require('./routes/listFood')) 
 //user list food
 app.use('/myfoods',require('./routes/myfood'))
+app.use('/detailFood',require('./routes/detailFood')) 
+
 
 app.listen(port, ()=> console.log(`server running in port ${port}`))
