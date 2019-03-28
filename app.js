@@ -20,6 +20,8 @@ app.use('/login',require('./routes/login'))
 app.use('/signup',require('./routes/signup'))
 app.use('/addfood',require('./routes/addfood'))
 //---> listFood
+//user list food
+app.use('/myfoods',require('./routes/myfood'))
 app.use('/detailFood',require('./routes/detailFood')) 
 
 
