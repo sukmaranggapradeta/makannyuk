@@ -6,14 +6,25 @@
   
 
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-<!-- !PAGE LOGIN! <div class="loginbox">-->
+<!-- !PAGE LOGIN!  -->
 
     <h1>Food</h1>
+    <!-- enctype="multipart/form-data"  -->
     <form action="/addfood" method="POST" enctype="multipart/form-data">
         <label for="food_name">Food name :</label><br>
         <input type="text" name="food_name" placeholder="Food name..."><br>
+
         <label for="category">Category :</label><br>
-        <input type="text" name="category" placeholder="Category..."><br>
+        <input list="category" name="category" placeholder="Choose category...">
+        <datalist id="category">
+
+        <% for (let i = 0 ; i < dataCategory.length ; i++ ) {%>
+          <option value="<%= dataCategory[i].category_name %>">
+        <% } %> 
+
+        
+        </datalist>
+        <br>
         <label for="deskripsi">Deskripsi :</label><br>
         <textarea rows="4" cols="50" name="deskripsi" placeholder="Description..."></textarea><br>
 

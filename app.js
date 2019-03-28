@@ -17,5 +17,7 @@ app.use('/signup',require('./routes/signup'))
 app.use('/addfood',require('./routes/addfood'))
 //---> listFood
 app.use('/listFood',require('./routes/listFood')) 
+//user list food
+app.use('/myfoods',require('./routes/myfood'))
 
 app.listen(port, ()=> console.log(`server running in port ${port}`))

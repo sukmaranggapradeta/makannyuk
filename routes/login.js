@@ -7,6 +7,7 @@ Router.get('/',(req,res)=>{
 
 Router.post('/',(req,res)=>{
     let input = req.body
+    res.send(input)
     Model.User.findOne({
         where :{
             user_name : input.user_name
