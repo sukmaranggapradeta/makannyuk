@@ -10,30 +10,29 @@
 
     <h1>Update Food</h1>
     <!-- enctype="multipart/form-data"  -->
-    <form action="/addfood" method="POST" enctype="multipart/form-data">
+    <form action="/updateFood/<%= editFood.id %>" method="POST" >
         <label for="food_name">Food name :</label><br>
-        <input type="text" name="food_name" placeholder="Food name..."><br>
-
+        <input type="text" name="food_name" value="<%= editFood.food_name %>"><br>
         <label for="category">Category :</label><br>
-        <input list="category" name="category" placeholder="Choose category...">
-        <datalist id="category" value="tes">
+      <select name="category">      
+      <%  for (let i = 0 ; i < dataCategory.length ; i++){ %>
+            <% if (editFood.CategoryId === dataCategory[i].id){ %>
+                <option value="<%= dataCategory[i].category_name %>" selected><%= dataCategory[i].category_name %></option>
+            <% } else { %>
+                <option value value="<%= dataCategory[i].category_name %>"><%= dataCategory[i].category_name %></option>
+           <% }%>
+        <% } %>
+    
+        </select>
 
-        <% for (let i = 0 ; i < dataCategory.length ; i++ ) {%>
-          <option value="<%= dataCategory[i].category_name %>">
-        <% } %> 
-
-        
-        </datalist>
         <br>
         <label for="deskripsi">Deskripsi :</label><br>
-        <textarea rows="4" cols="50" name="deskripsi" placeholder="Description..."></textarea><br>
+        <textarea rows="6" cols="50" name="deskripsi" value=""><%= editFood.description %></textarea><br>
 
         <h2><%= typeof msg != 'undefined' ? msg : '' %> </h2>
 
-        <label for="myPicture">Upload picture :</label><br>        
-        <input type="file" name="myPicture"><br>
         <label for="ingredient">Ingredient :</label><br>
-        <input type="text" name="ingredient" placeholder="ingredient..."><br>
+        <input type="text" name="ingredient" value="<% for (let i = 0 ; i < editFood.Ingredients.length ; i++){%><%= editFood.Ingredients[i].ingredient_name%><%if(i === editFood.Ingredients.length-1){%><%}else{%>,<%}%><%}%>"><br>
         <p></p>
         <input type="submit" value="Save">
 

@@ -27,14 +27,22 @@ tr:nth-child(even) {
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 <p><p><p>
 <table>
-    <% if (msg) { %>
+
+  <% if (msg) { %>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> file has been deleted.
+        <strong>file has been deleted!</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
         </div>
-
+    <% } %>
+    <% if (updateText !== null) { %>
+    <div class="alert alert-success" role="alert">
+        <strong><%= updateText%></strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
     <% } %>
     
   <tr>
@@ -51,7 +59,8 @@ tr:nth-child(even) {
     <td><%= i+1 %></td>
     <td><%= myfoodslist[i].food_name %></td>
     <td><%= myfoodslist[i].description %></td>
-    <td><%= myfoodslist[i].CategoryId %></td>
+
+    <td><%= myfoodslist[i].Category.category_name %></td>
     
     <% if (myfoodslist[i].Ingredients.length === 0 || myfoodslist[i].Ingredients.length === null ){ %>
     <td>empty</td>
@@ -63,7 +72,7 @@ tr:nth-child(even) {
         <%}%>
     <% } %>
     </td>
-    <td><a href="/updateFood"> edit </a>| <a onclick="konfirmasi(<%= myfoodslist[i].id %>)">Delete</a></td>
+    <td><a class="linkaja" href="/updateFood/<%= myfoodslist[i].id %>">Edit</a> | <a onclick="konfirmasi(<%= myfoodslist[i].id %>)">Delete</a></td>
   </tr>
     <% } %>
 </table>

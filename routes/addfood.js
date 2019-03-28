@@ -30,9 +30,6 @@ Router.get('/',(req,res)=>{
 })
 
 Router.post('/', upload.single('myPicture'), function (req, res, next) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  
   // res.send(req.body)
   // return 0
   let picName = req.file.filename
@@ -56,32 +53,7 @@ Router.post('/', upload.single('myPicture'), function (req, res, next) {
         CategoryId:idCategory.id
       })
       .then(sukses=>{
-        // upload(req, res, (err) => {
-        //   file: `uploads/${req.file.filename}`
-        // })
-        // upload(req, res, (err) => {
-        //   if(err){
-        //     Model.Category.findAll()
-        //     .then(dataCategory=>{
-        //       // res.send(dataCategory)
-        //       res.render('./addFoods.ejs', {
-        //         msg: err.message,
-        //         dataCategory :dataCategory
-        //       });
-        //     })
-        //   } else {
-        //     if(req.file == undefined){
-        //       res.render('./addFoods.ejs', {
-        //         msg: 'Error: No File Selected!'
-        //       });
-        //     } else {
-        //         res.render('./addFoods.ejs', {
-        //           msg: 'File Uploaded!',
-        //           file: `uploads/${req.file.filename}`
-        //         });
-        //       }
-        //     }
-        //   });
+
         for (let i = 0 ; i < newIngredient.length ; i++){
           Model.Ingredient.findOne({
             where :{
@@ -122,7 +94,19 @@ Router.post('/', upload.single('myPicture'), function (req, res, next) {
                 updatedAt: new Date()
               })
               .then(sukses=>{
-                res.send("save sukses")
+                // res.send("save sukses")
+                    Model.Food.findAll({
+                      order:[["id","ASC"]],
+                      include:[
+                          {model:Model.Ingredient},
+                          {model:Model.Category}
+                      ]
+                  })
+                  .then(myfoodslist=>{
+                  // res.send(myfoodslist)
+                  // return 0
+                      res.render('./myFoods.ejs',{myfoodslist:myfoodslist, msg:false,updateText:"save success"})
+                  })
               })
               .catch(err=>{
                 res.send(err.message)
@@ -149,48 +133,6 @@ Router.post('/', upload.single('myPicture'), function (req, res, next) {
 
 })
 
-// Router.post('/', (req,res)=>{
-
-// })
-
-
-
-// Router.post('/',(req,res)=>{
-
-//   });
-
-//SET STORAGE FILE
-// const storage = multer.diskStorage({
-//     destination:'./public/upload/', 
-//     filename:function(req,file,cb){
-//         cb(null,file.fieldname + "-" + Date.now()+ path.extname(file.originalname))
-//     }
-// })
-
-//INIT UPLOAD
-// const upload = multer({
-//     storage:storage,
-//     limits:{fileSize: 1000000 },
-//     fileFilter: function(req, file, cb){
-//         checkFileType(file, cb);
-//       }
-// }).single('myPicture')
-
-// // Check File Type
-// function checkFileType(file, cb){
-//     // Allowed ext
-//     const filetypes = /jpeg|jpg|png|gif/;
-//     // Check ext
-//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-//     // Check mime
-//     const mimetype = filetypes.test(file.mimetype);
-  
-//     if(mimetype && extname){
-//       return cb(null,true);
-//     } else {
-//       cb('Error: Images Only!');
-//     }
-//   }
 
 
 module.exports = Router
