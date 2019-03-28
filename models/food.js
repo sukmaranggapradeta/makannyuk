@@ -13,5 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     Food.belongsTo(models.User, {foreignKey: 'UserId'})
     Food.belongsTo(models.Category, {foreignKey: 'CategoryId'})
   };
+
+  
   return Food;
 };
