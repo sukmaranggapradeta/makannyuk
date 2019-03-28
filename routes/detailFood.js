@@ -11,7 +11,7 @@ Router.get('/:id', function(req,res){
             res.render('detailFood.ejs',{data})
         })
         .catch(function(err){
-            console.log(err)
+           res.redirect('/')
             
         })
 })

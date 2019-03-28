@@ -5,7 +5,8 @@ Router.get('/',(req,res)=>{
     // res.send(req.session)
     Model.Food.findAll()
     .then(dataFoods=>{
-        res.render('./index.ejs',{dataFoods:dataFoods})
+        req.session.loginStatus = true
+        res.render('./index.ejs',{dataFoods:dataFoods, currentUser: req.session.loginStatus})
     })
 })
 
