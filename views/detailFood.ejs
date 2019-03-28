@@ -16,6 +16,18 @@
       <h4><b>Category: <%=data.Category.category_name%></b></h4>
       <h6><i>With Passion For Real, Good Food</i></h6>
       <p><%=data.description%></p>
+      <h4>Bahan terbaiknya</h4>
+      <table>
+          <tr>
+            <%for(let i = 0; i < data.Ingredients.length; i++){ %>
+               - <%=data.Ingredients[i].ingredient_name%>
+                <% } %>
+            </tr>
+
+      </table>
+           
+        
+
       
     </div>
   </div>

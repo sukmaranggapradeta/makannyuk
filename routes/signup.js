@@ -10,7 +10,7 @@ Router.post('/',(req,res)=>{
     Model.User.cekEmail(input.email)
     .then(function(data){
         if(data === true){
-           res.send(err.message)
+            res.render('./signup.ejs', {message: 'salah format'})
         }else{
             Model.User.create({
                 first_name: input.first_name,
