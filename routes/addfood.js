@@ -24,14 +24,29 @@ Router.post('/', (req, res) => {
           });
         } else {
           let input = req.body
-          res.send(req.file.filename)
+          // res.send(input)
+          let newIngredient = input.ingredient.split(",")
+          for (let i = 0 ; i < newIngredient.length ; i++){
+            Model.Ingredient.create({
+              ingredient_name: newIngredient[i],
+              createdAt:new Date(),
+              updatedAt:new Date
+            })
+            .then(sukses=>{
+              req.send("sukses")
+            })
+            .catch(err=>{
+              req.send(err.message)
+            })
+          }
+          
+
           // Model.Food.create({
           //   food_name: input.food_name,
           //   picture: req.file.filename,
           //   description: input.description,
-          //   UserId: input.INTEGER,
-          //   CategoryId: input.INTEGER,
-
+          //   // UserId: input.INTEGER,
+          //   // CategoryId: input.INTEGER,
           // })
           res.render('./addFoods.ejs', {
             msg: 'File Uploaded!',
