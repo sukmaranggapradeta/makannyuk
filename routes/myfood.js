@@ -13,7 +13,7 @@ Router.get('/',(req,res)=>{
     })
     .then(myfoodslist=>{
     // res.send(myfoodslist)
-        res.render('./myFoods.ejs',{myfoodslist:myfoodslist, msg:false ,updateText:null})
+        res.render('./myFoods.ejs',{myfoodslist:myfoodslist, msg:false ,updateText:null, currentUser: req.session.loginStatus})
     })
 })
 
