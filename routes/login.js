@@ -24,7 +24,7 @@ Router.post('/',(req,res)=>{
            console.log(req.session.loginStatus)
            Model.Food.findAll()
            .then(dataFoods=>{
-               res.render('./index.ejs',{dataFoods:dataFoods, currentUser: req.session.loginStatus})
+               res.render('./index.ejs',{dataFoods:dataFoods})
            })
            .catch(function(err){
            res.send(err.message)

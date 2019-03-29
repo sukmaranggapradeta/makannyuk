@@ -2,7 +2,7 @@ const Router = require('express').Router()
 const Model = require('../models')
 
 Router.get('/',(req,res)=>{
-    res.render('./signup.ejs', {message: null})
+    res.render('./signup.ejs', {message: null, currentUser: req.session.loginStatus})
 })
 
 Router.post('/',(req,res)=>{
@@ -31,7 +31,7 @@ Router.post('/',(req,res)=>{
         }
     })
     .catch(err=>{
-        res.render('./signup.ejs',{message: 'email sama'})
+        res.render('./signup.ejs',{message: 'email sama', currentUser: req.session.loginStatus})
     })
    
     

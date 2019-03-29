@@ -15,7 +15,7 @@ Router.get('/:id',(req,res)=>{
         Model.Category.findAll()
         .then(dataCategory=>{
             // res.send(dataCategory)
-            res.render('./updateFood.ejs',{editFood:editFood,dataCategory:dataCategory})
+            res.render('./updateFood.ejs',{editFood:editFood,dataCategory:dataCategory, currentUser: req.session.loginStatus})
         })
         .catch(err=>{
             res.send(err.message)
@@ -77,6 +77,44 @@ Router.post('/:id', function (req, res, next) {
                         res.send(err.message)
                     })
                 }
+                    ////looping lagi
+                for (let i = 0 ; i < newIngredient.length ; i++){
+                    Model.Food.findOne({
+                    where:{
+                        food_name:food_name
+                    }
+                    })
+                    .then(idFood=>{
+                    Model.Ingredient.findOne({
+                        where:{
+                        ingredient_name:newIngredient[i]
+                        }
+                    })
+                    .then(idIngredient=>{
+                        Model.Food_Ingredient.update({
+                        FoodId: idFood.id,
+                        IngredientId: idIngredient.id,
+                        createdAt: new Date(),
+                        updatedAt: new Date()
+                        })
+                        .then(sukses=>{
+                        res.send("save sukses")
+                        })
+                        .catch(err=>{
+                        res.send(err.message)
+                        })
+                    })
+                    .catch(err=>{
+                        res.send(err.message)
+                    })
+                    })
+                    .catch(err=>{
+                    res.send(err.message)
+                    })
+                }
+                    //endloop
+
+
 
             Model.Food.findAll({
                 order:[["id","ASC"]],

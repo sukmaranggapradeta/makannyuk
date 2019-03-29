@@ -22,7 +22,7 @@ Router.get('/',(req,res)=>{
     Model.Category.findAll()
     .then(dataCategory=>{
       // res.send(dataCategory)
-      res.render('./addFoods.ejs',{dataCategory:dataCategory})
+      res.render('./addFoods.ejs',{dataCategory:dataCategory, currentUser: req.session.loginStatus})
     })
     .catch(err=>{
       res.send(err.message)
